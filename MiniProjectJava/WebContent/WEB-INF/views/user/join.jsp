@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <c:set var='root' value="${pageContext.request.contextPath }/"/>
@@ -16,6 +15,36 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 </head>
 <body>
+<script>
+	function checkUserIdExist(){
+		
+		var user_id = $("#user_id").val()
+		
+		if(user_id.length == 0){
+			alert('아이디를 입력해주세요')
+			return
+		}
+		
+		$.ajax({
+			url : '${root}user/checkUserIdExist/' + user_id,
+			type : 'get',
+			dataType : 'text',
+			success : function(result){
+				if(result.trim() == 'true'){
+					alert('사용할 수 있는 아이디입니다')
+					$("#userIdExist").val('true')
+				} else{
+					alert('사용할 수 없는 아이디입니다')
+					$("#userIdExist").val('false')
+				}
+			}
+		})
+	}
+	
+	function resetUserIdExist(){
+		$("#userIdExist").val('false')
+	}
+</script>
 
 <c:import url="/WEB-INF/views/include/top_menu.jsp"/>
 
@@ -26,6 +55,7 @@
 			<div class="card shadow">
 				<div class="card-body">
 					<form:form action="${root }user/join_pro" method='post' modelAttribute="joinUserBean">			
+						<form:hidden path="userIdExist"/>
 						<div class="form-group">
 							<form:label path="user_name">이름</form:label>
 							<form:input path="user_name" class='form-control'/>
@@ -34,9 +64,9 @@
 						<div class="form-group">
 							<form:label path="user_id">아이디</form:label>
 							<div class="input-group">
-                                <form:input path="user_id" class='form-control'/>
+                                <form:input path="user_id" class='form-control' onkeypress="resetUserIdExist()"/>
 								<div class="input-group-append">
-									<button type="button" class="btn btn-primary">중복확인</button>
+									<button type="button" class="btn btn-primary" onclick='checkUserIdExist()'>중복확인</button>
 								</div>
 							</div>
 							<form:errors path="user_id" style='color:red'/>
@@ -49,7 +79,7 @@
 						<div class="form-group">
 							<form:label path="user_pw2">비밀번호 확인</form:label>							
 							<form:password path="user_pw2" class='form-control'/>
-							<form:errors path='user_pw2'style='color:red'/>
+							<form:errors path='user_pw2' style='color:red'/>
 						</div>
 						<div class="form-group">
 							<div class="text-right">								
