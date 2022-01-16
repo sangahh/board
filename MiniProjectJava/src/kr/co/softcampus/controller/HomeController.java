@@ -11,11 +11,12 @@ import kr.co.softcampus.beans.UserBean;
 @Controller
 public class HomeController {
 	
-	@Resource(name = "loginUserBean")
-	private UserBean loginUserBean;
+//	@Resource(name = "loginUserBean")
+//	private UserBean loginUserBean;
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
+//		System.out.println(loginUserBean);
 		return "redirect:/main";
 	}
 }

@@ -25,7 +25,7 @@ public class UserController {
 	
 	
 	@GetMapping("/login")
-	public String login() {
+	public String login(@ModelAttribute("tempLoginUserBean") UserBean tempLoginUserBean) {
 		return "user/login";
 	}
 	
