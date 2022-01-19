@@ -21,6 +21,7 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import kr.co.softcampus.Interceptor.CheckLoginInterceptor;
 import kr.co.softcampus.Interceptor.TopMenuInterceptor;
 import kr.co.softcampus.beans.UserBean;
 import kr.co.softcampus.mapper.BoardMapper;
@@ -134,6 +135,12 @@ public class ServletAppContext implements WebMvcConfigurer{
 		InterceptorRegistration reg1 = registry.addInterceptor(topMenuInterceptor);
 		reg1.addPathPatterns("/**");
 		
+		//로그인할 경우에만 해당페이지로 이동
+		CheckLoginInterceptor checkLoginInterceptor = new CheckLoginInterceptor(loginUserBean);
+		InterceptorRegistration reg2= registry.addInterceptor(checkLoginInterceptor);
+		reg2.addPathPatterns("/user/modify", "/user/logout", "/board/*");
+		reg2.excludePathPatterns("/board/main");
+	
 	}
 	
 	@Bean

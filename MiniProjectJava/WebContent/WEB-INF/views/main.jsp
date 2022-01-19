@@ -69,7 +69,7 @@
 		<div class="col-lg-6" style="margin-top:20px">
 			<div class="card shadow">
 				<div class="card-body">
-					<h4 class="card-title">유머게시판</h4>
+					<h4 class="card-title">스터디모집</h4>
 					<table class="table table-hover">
 						<thead>
 							<tr>
@@ -115,7 +115,7 @@
 		<div class="col-lg-6" style="margin-top:20px">
 			<div class="card shadow">
 				<div class="card-body">
-					<h4 class="card-title">정치게시판</h4>
+					<h4 class="card-title">커뮤니티</h4>
 					<table class="table table-hover">
 						<thead>
 							<tr>
@@ -160,7 +160,7 @@
 		<div class="col-lg-6" style="margin-top:20px">
 			<div class="card shadow">
 				<div class="card-body">
-					<h4 class="card-title">스포츠게시판</h4>
+					<h4 class="card-title">벼룩시장</h4>
 					<table class="table table-hover">
 						<thead>
 							<tr>
